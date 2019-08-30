@@ -1,0 +1,32 @@
+﻿<Window x:Class="SCADA.Desiner.WorkForms.NewWidthHeightElement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          Title="MainWindow" Height="60" Width="175"  WindowStyle="None" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" AllowsTransparency="True" Background="Transparent" MouseLeftButtonDown ="Window_MouseLeftButtonDown">
+    <Border  Style="{StaticResource MyBorderStyle}" >
+        <Grid>
+
+            <StackPanel Name="panel2" Background="Transparent"   HorizontalAlignment="Stretch"   OpacityMask="White" >
+                <WrapPanel Visibility="Collapsed" Name="PanelHeight">
+                    <Label Name="label_y" Content="Высота:" FontWeight="Bold" Width="70" FontSize="12"  />
+                    <TextBox  Name="text_box_height" FontWeight="Bold" FontSize="12"   Width="75" TextChanged="text_box_height_TextChanged" />
+                    <Label  Content="   " />
+                </WrapPanel>
+                <WrapPanel >
+                    <Label Name="label_x" Content="  Ширина:" FontWeight="Bold" Width="70" FontSize="12"  />
+                    <TextBox   Name="text_box_width" FontWeight="Bold" FontSize="12"   Width="75" TextChanged="text_box_width_TextChanged" />
+                </WrapPanel>
+                <WrapPanel Visibility="Collapsed" Name="Buffer">
+                    <Label  Content="  " />
+                </WrapPanel>
+                <WrapPanel >
+                    <Label  Content="  " />
+                    <Button Height="25" Width="75"  Name="button_OK" Content="Принять" Click="button_OK_Click" IsEnabled="False"></Button>
+                    <Label  Content="  " />
+                    <Button  Height="25" Width="75"  Name="button_Cancel" Content="Отмена" Click="button_Cancel_Click" ></Button>
+                    <Label  Content="  " />
+                </WrapPanel>
+
+            </StackPanel >
+        </Grid>
+    </Border>
+</Window>

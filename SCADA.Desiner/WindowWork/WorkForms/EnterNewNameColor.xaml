@@ -1,0 +1,29 @@
+﻿<Window x:Class="SCADA.Desiner.WorkForms.EnterNewNameColor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          Title="NewColorForm" Height="95" Width="480" WindowStyle="None" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" AllowsTransparency="True" Background="Transparent"  MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border  Style="{StaticResource MyBorderStyle}"  >
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition  />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition  />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+
+            <Label  Grid.Row="1" Grid.Column="1"  Content="Выберите имя цвета:" FontWeight="Bold" FontSize="12"  HorizontalAlignment="Left"  VerticalAlignment="Top"  Name="label_scroll" Margin="5,4,0,0"/>
+            <Label  Grid.Row="1" Grid.Column="1"  Content="Выберите цвет:" FontWeight="Bold" FontSize="12"  HorizontalAlignment="Left"  VerticalAlignment="Top"  Name="name_color" Margin="5,28,0,0"/>
+            <Canvas Grid.Row="1" Grid.Column="1" Name="panel_color"  Width="20" Height="20" Margin="146,28,288,21" RenderTransformOrigin="-0.95,0.7" MouseDown="panel_color_MouseDown" />
+            <TextBox Grid.Row="1" Grid.Column="1" Name="textBox_name"  Height="20" Width="298" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="146,2,0,0"  />
+            <Button Grid.Row="1" Grid.Column="1" Height="25" Width="75"  Name="button_OK" Content="Принять" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_OK_Click" Margin="293,36,0,0" />
+            <Button Grid.Row="1" Grid.Column="1" Height="25" Width="75"  Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_Cancel_Click" Margin="373,35,0,0" />
+
+        </Grid>
+    </Border>
+</Window>

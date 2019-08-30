@@ -1,0 +1,38 @@
+﻿<Window x:Class="SCADA.Desiner.Tools.SettingsFigure"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SCADA.Desiner.Themes"
+        Title=""   Style="{StaticResource MyWindowStyle}"   WindowStartupLocation="Manual" Closing="Window_Closing"   Icon="/SCADA.Desiner;component/Images/Эмблема.ico" 
+        ShowInTaskbar="False"  MouseLeftButtonDown="Window_MouseLeftButtonDown" ShowActivated="False">
+    <Window.Resources>
+        <local:SettingsColorConverter x:Key="SettingsColorConverter" />
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="{Binding IsSelect, Converter={StaticResource SettingsColorConverter}}" />
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource MyBorderStyle}">
+        <Grid Name="grid">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition   Width="5"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition   Height="10"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid    Name="TableObject"  SelectionChanged="TableObject_SelectionChanged"   Background="Transparent" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№ "   Binding="{Binding  Number}" />
+                    <DataGridTextColumn Header=" Координата " Binding="{Binding Point}" />
+                    <DataGridTextColumn Header=" Угол " Binding="{Binding Angle}" />
+                    <DataGridTextColumn Header=" Смещение" Binding="{Binding Delta}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </Border>
+</Window>
+

@@ -1,0 +1,39 @@
+﻿<Window x:Class="SCADA.Desiner.Tools.ToolsManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           Title="Управляющие элементы" Height="204" Width="327" Style="{StaticResource MyWindowStyle}" Icon="/SCADA.Desiner;component/Images/Эмблема.ico"  
+        WindowStartupLocation="Manual"
+        Closing="Window_Closing"  MouseLeftButtonDown="Window_MouseLeftButtonDown" ShowActivated="False" >
+    <Border Style="{StaticResource MyBorderStyle}">
+        <Grid Name="grid">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition  />
+            </Grid.ColumnDefinitions>
+            <Canvas Name="draw"></Canvas>
+
+            <StackPanel Name="panel1" Background="Transparent"  HorizontalAlignment="Stretch" >
+                <Button Name="button_management" Content="Управляющий элемент" Click="button_management_Click" />
+                <Button Name="button_table_number" Content="Таблица поездов"  Click="button_table_number_Click" />
+                <Button Name="button_table_autopilot" Content="Таблица комманд"  Click="button_table_autopilot_Click" />
+                <Button Name="button_area_station" Content="Область станции"  Click="button_area_station_Click" />
+                <Button Name="button_area_message" Content="Область справки"  Click="button_area_message_Click" />
+
+            </StackPanel>
+
+            <StackPanel Name="panel2" Background="Transparent"   HorizontalAlignment="Stretch"   OpacityMask="White" Grid.Column="1" Grid.ColumnSpan="1">
+                <Label   Content="Название объекта:" HorizontalAlignment="Center"  FontSize="13" />
+                <TextBox  Name="Name_textbox"></TextBox>
+                <Label   Content="Справка по объекту" HorizontalAlignment="Center"  FontSize="13" />
+                <TextBox  Name="Help_textbox"></TextBox>
+                <Label Name="label_0"  Content="Тип управляния" HorizontalAlignment="Center"  FontSize="13" />
+                <ComboBox  Name="Combox_ViewCommand" />
+                <Label Name="label_1"  Content="Область управления" HorizontalAlignment="Center"  FontSize="13" />
+                <ComboBox  Name="Combox_ViewPanel" />
+                <Button Name="Ok_Settings" Content="Принять описание" Click="Ok_Settings_Click"></Button>
+            </StackPanel >
+        </Grid>
+    </Border>
+</Window>
+

@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61D7007F-79DB-498F-9BD1-A71C8DF0E373}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SCADA.Desiner</RootNamespace>
+    <AssemblyName>SCADA.Desiner</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SCADA.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SCADA.Common\SaveProtocol\bin\Debug\SCADA.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BaseElement\DiagnostikCell.cs" />
+    <Compile Include="BaseElement\Disconnectors.cs" />
+    <Compile Include="Converters\RoundValue.cs" />
+    <Compile Include="Converters\ScrollConvert.cs" />
+    <Compile Include="Enums\ViewCancel.cs" />
+    <Compile Include="Enums\ViewGroupElement.cs" />
+    <Compile Include="Enums\ViewLayer.cs" />
+    <Compile Include="Enums\ViewObject.cs" />
+    <Compile Include="HelpsProject\MathOperation.cs" />
+    <Compile Include="Inteface\IText.cs" />
+    <Compile Include="Select\MinLenght.cs" />
+    <Compile Include="Select\MouseSelect.cs" />
+    <Compile Include="Select\SelectOperation.cs" />
+    <Compile Include="Themes\ColorTable.cs" />
+    <Compile Include="Tools\SettingsFigure.xaml.cs">
+      <DependentUpon>SettingsFigure.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ToolsGraphics.xaml.cs">
+      <DependentUpon>ToolsGraphics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ToolsManagement.xaml.cs">
+      <DependentUpon>ToolsManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\HatchLineForm.xaml.cs">
+      <DependentUpon>HatchLineForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkGrafic.cs" />
+    <Compile Include="WindowWork\WorkForms\CloseProgramm.xaml.cs">
+      <DependentUpon>CloseProgramm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\EnterNewNameColor.xaml.cs">
+      <DependentUpon>EnterNewNameColor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\NewColorForm.xaml.cs">
+      <DependentUpon>NewColorForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\NewSizeElementWpf.xaml.cs">
+      <DependentUpon>NewSizeElementWpf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\NewWidthHeightElement.xaml.cs">
+      <DependentUpon>NewWidthHeightElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\SaveOpenFormsWpf.xaml.cs">
+      <DependentUpon>SaveOpenFormsWpf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowWork\WorkForms\SetAngle.xaml.cs">
+      <DependentUpon>SetAngle.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BaseElement\Area.cs" />
+    <Compile Include="BaseElement\ArrowMove.cs" />
+    <Compile Include="BaseElement\ButtonStation.cs" />
+    <Compile Include="BaseElement\KGU.cs" />
+    <Compile Include="BaseElement\KTCM.cs" />
+    <Compile Include="BaseElement\LightShunting.cs" />
+    <Compile Include="BaseElement\LightTrain.cs" />
+    <Compile Include="BaseElement\LineHelp.cs" />
+    <Compile Include="BaseElement\LinePeregon.cs" />
+    <Compile Include="BaseElement\Move.cs" />
+    <Compile Include="BaseElement\NameStation.cs" />
+    <Compile Include="BaseElement\NumberTrain.cs" />
+    <Compile Include="BaseElement\RamkaStation.cs" />
+    <Compile Include="BaseElement\Signal.cs" />
+    <Compile Include="BaseElement\TextHelp.cs" />
+    <Compile Include="BaseElement\TimeForm.cs" />
+    <Compile Include="BaseElement\Track.cs" />
+    <Compile Include="CommandElement\ButtonCommand.cs" />
+    <Compile Include="Constanst\MainColors.cs" />
+    <Compile Include="Delegate\Delegates.cs" />
+    <Compile Include="Enums\AligmentMirror.cs" />
+    <Compile Include="Enums\AligmentStroke.cs" />
+    <Compile Include="GeometryTransform\HelpesCalculation.cs" />
+    <Compile Include="GeometryTransform\OperationsGrafic.cs" />
+    <Compile Include="HelpsProject\GetStationNumberName.cs" />
+    <Compile Include="HelpsProject\History.cs" />
+    <Compile Include="HelpsProject\IndexFigure.cs" />
+    <Compile Include="HelpsProject\MySettingsFigure.cs" />
+    <Compile Include="HelpsProject\MyTable.cs" />
+    <Compile Include="HelpsProject\PointFigure.cs" />
+    <Compile Include="HelpsProject\ScrollStrokeThickess.cs" />
+    <Compile Include="HelpsProject\SizeElement.cs" />
+    <Compile Include="HelpsProject\Station.cs" />
+    <Compile Include="HelpsProject\StationProject.cs" />
+    <Compile Include="Inteface\IDeleteElement.cs" />
+    <Compile Include="Inteface\IFontSize.cs" />
+    <Compile Include="Inteface\IFreeAngle.cs" />
+    <Compile Include="Inteface\IGraficObejct.cs" />
+    <Compile Include="Inteface\IResize.cs" />
+    <Compile Include="Inteface\IScrollElement.cs" />
+    <Compile Include="Inteface\IShowSettings.cs" />
+    <Compile Include="MainMenu\MainContextMenu.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\BureauBlack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\BureauBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ExpressionLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ShinyRed.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WhistlerBlue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\SettingsFigure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\ToolsGraphics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\ToolsManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\CloseProgramm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\EnterNewNameColor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\HatchLineForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\NewColorForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\NewSizeElementWpf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\NewWidthHeightElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\SaveOpenFormsWpf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowWork\WorkForms\SetAngle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CursorNew.cur" />
+    <Resource Include="Images\Эмблема.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
