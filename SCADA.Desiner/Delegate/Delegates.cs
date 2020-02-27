@@ -14,6 +14,7 @@ namespace SCADA.Desiner.Delegate
     // public delegate void NewColor(byte R, byte G, byte B);
     public delegate void NewColor(NameColors NameColor);
     public delegate void NewWeight(double Weight);
+    public delegate void IsFillInside();
     public delegate void NewScroll(double Scroll);
     public delegate void NewSize(double width, double height);
     public delegate void NewFamilyFont(string FamilyFont);
@@ -31,7 +32,7 @@ namespace SCADA.Desiner.Delegate
     public delegate void UpdateGeometry(List<IGraficObejct> objects);
     public delegate void SelectObject(List<IGraficObejct> objects);
     public delegate void UpdateCountTime(int cout);
-    public delegate void NewPicture(string path);
+    public delegate void NewSourceForArea(string path, ViewArea viewArea);
     public delegate void NewLayer(ViewLayer viewlayer, int layer);
     public delegate void HatchLine(IList<double> arrayhatch);
 }

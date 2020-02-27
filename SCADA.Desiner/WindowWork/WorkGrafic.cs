@@ -105,7 +105,7 @@ namespace SCADA.Desiner.WindowWork
 
         public static double StepValue { get; set;}
 
-        static double _ktextweight = 1.4;
+        static double _ktextweight = 1.6;
         public static double Kwtext
         {
             get
@@ -117,7 +117,7 @@ namespace SCADA.Desiner.WindowWork
                 _ktextweight = value;
             }
         }
-        static double _ktextheight = 0.75;
+        static double _ktextheight = 1.00;
         public static double Khtext
         {
             get
@@ -855,7 +855,9 @@ namespace SCADA.Desiner.WindowWork
         {
             System.Windows.Forms.SaveFileDialog saveFileDial = new System.Windows.Forms.SaveFileDialog();
             saveFileDial.Filter = "Xml files (*.xml)|*.xml";
-            StrageProject Project = operationsGrafic.SaveAnalis(ViewSave.save, currentDrawElement.Values.ToList());
+            var Project = operationsGrafic.SaveAnalis(ViewSave.save, currentDrawElement.Values.ToList());
+            if (operationsGrafic.ProjectOpen != null)
+                Project.Transform = operationsGrafic.ProjectOpen.Transform;
             //
             if (saveAS || (!saveAS && filenamesave.Length == 0))
             {
@@ -960,9 +962,9 @@ namespace SCADA.Desiner.WindowWork
             operationsGrafic.OriginalSizeCurrent(true, activeel, groupTransform, lineramkadraw);
         }
 
-        private void EventNewPicture(string path)
+        private void EventNewSource(string path, ViewArea viewArea)
         {
-            operationsGrafic.SetPathPicture(path, activeel);
+            operationsGrafic.SetPathPicture(path, activeel, viewArea);
         }
 
         private void EventNewLayer(ViewLayer viewlayer, int layer)
@@ -1057,17 +1059,17 @@ namespace SCADA.Desiner.WindowWork
                         {
                             if (toolspanel.CurrentDraw == ViewElement.line || toolspanel.CurrentDraw == ViewElement.otrezok)
                             {
-                                 if(toolspanel.CurrentDraw == ViewElement.line)
-                                     operationsGrafic.NewPointAddLineHelp(currentDraw, draw_canvas, toolspanel, currentDrawElement);
+                                if (toolspanel.CurrentDraw == ViewElement.line)
+                                    operationsGrafic.NewPointAddLineHelp(currentDraw, draw_canvas, toolspanel, currentDrawElement);
                                 else
-                                     operationsGrafic.NewPointAddLineHelp(currentDraw, draw_canvas, toolspanel, currentDrawElement);
+                                    operationsGrafic.NewPointAddLineHelp(currentDraw, draw_canvas, toolspanel, currentDrawElement);
                             }
                             else
                             {
-                                if(toolspanel.CurrentDraw != ViewElement.none)
+                                if (toolspanel.CurrentDraw != ViewElement.none)
                                     operationsGrafic.AddHistory(currentDrawElement);
                                 //
-                                if (toolspanel.CurrentDraw != ViewElement.area_picture)
+                                if (toolspanel.CurrentDraw != ViewElement.area_picture && toolspanel.CurrentDraw != ViewElement.webBrowser)
                                     toolspanel.CurrentDraw = ViewElement.none;
                                 window.Cursor = Cursors.Arrow;
                             }
@@ -1109,13 +1111,14 @@ namespace SCADA.Desiner.WindowWork
                 menu.SpisokId += EventSelectObjectNew;
                 menu.Delete += EventDeleteObject;
                 menu.OriginalSize += EventFirstSize;
-                menu.NewPicture += EventNewPicture;
+                menu.NewSource += EventNewSource;
                 menu.NewLayer += EventNewLayer;
                 menu.Rotate += EventRotateElement;
                 menu.HatchLine += EventHatchLine;
                 menu.Reverse += EventReversePeregon;
                 menu.NewColor += EventNewColorElement;
                 menu.NewWeight += EventNewWeightElement;
+                menu.IsFillInside += EventIsFillInside;
                 menu.NewScroll += EventNewScrollElement;
                 menu.NewSize += EventNewSizeElement;
                 menu.NewAligment += EventAligmentElement;
@@ -1142,6 +1145,11 @@ namespace SCADA.Desiner.WindowWork
                 }
                // }
             }
+        }
+
+        private void EventIsFillInside()
+        {
+            operationsGrafic.IsFillInside(activeel, currentDrawElement);
         }
 
         public void EventDeleteObject()
@@ -1342,40 +1350,48 @@ namespace SCADA.Desiner.WindowWork
                 }
                 //
                 if (toolspanelcommand.CurrentDraw == ViewElement.tablenumbertrain || toolspanelcommand.CurrentDraw == ViewElement.area_message
-                     || toolspanelcommand.CurrentDraw == ViewElement.area_station || toolspanelcommand.CurrentDraw == ViewElement.tableautopilot || toolspanel.CurrentDraw == ViewElement.area_picture)
+                     || toolspanelcommand.CurrentDraw == ViewElement.area_station || toolspanelcommand.CurrentDraw == ViewElement.tableautopilot || toolspanel.CurrentDraw == ViewElement.area_picture || toolspanel.CurrentDraw == ViewElement.webBrowser)
                 {
                     if (operationsGrafic.FrameRec != null)
                     {
                         if (window.Cursor != Cursors.Arrow)
                             window.Cursor = Cursors.Arrow;
                         Area area = null;
-                        if (toolspanel.CurrentDraw == ViewElement.area_picture)
+                        //
+                        switch (toolspanel.CurrentDraw)
                         {
-                            area = new Area(operationsGrafic.FrameRec, ViewArea.area_picture, "Область картинки");
-                            toolspanel.CurrentDraw = ViewElement.none;
+                            case ViewElement.area_picture:
+                                area = new Area(operationsGrafic.FrameRec, ViewArea.area_picture, "Область поездов");
+                                break;
+                            case ViewElement.webBrowser:
+                                area = new Area(operationsGrafic.FrameRec, ViewArea.webBrowser, "Область браузера");
+                                break;
+                            default:
+                                {
+                       
+                                    switch (toolspanelcommand.CurrentDraw)
+                                    {
+                                        case ViewElement.tablenumbertrain:
+                                            area = new Area(operationsGrafic.FrameRec, ViewArea.table_train, "Область поездов");
+                                            break;
+                                        case ViewElement.area_station:
+                                            area = new Area(operationsGrafic.FrameRec, ViewArea.area_station, "Область станции");
+                                            break;
+                                        case ViewElement.area_message:
+                                            area = new Area(operationsGrafic.FrameRec, ViewArea.area_message, "Область справки");
+                                            break;
+                                        case ViewElement.tableautopilot:
+                                            area = new Area(operationsGrafic.FrameRec, ViewArea.table_autopilot, "Область автодействия");
+                                            break;
+                                            //default:
+                                            //    area = new Area(operationsGrafic.FrameRec, ViewArea.table_train, "Область поездов");
+                                            //    break;
+                                    }
+                                }
+                                break;
                         }
-                        else
-                        {
-                            switch (toolspanelcommand.CurrentDraw)
-                            {
-                                case ViewElement.tablenumbertrain:
-                                    area = new Area(operationsGrafic.FrameRec, ViewArea.table_train, "Область поездов");
-                                    break;
-                                case ViewElement.area_station:
-                                    area = new Area(operationsGrafic.FrameRec, ViewArea.area_station, "Область станции");
-                                    break;
-                                case ViewElement.area_message:
-                                    area = new Area(operationsGrafic.FrameRec, ViewArea.area_message, "Область справки");
-                                    break;
-                                case ViewElement.tableautopilot:
-                                    area = new Area(operationsGrafic.FrameRec, ViewArea.table_autopilot, "Область автодействия");
-                                    break;
-                                //default:
-                                //    area = new Area(operationsGrafic.FrameRec, ViewArea.table_train, "Область поездов");
-                                //    break;
-                            }
-                            toolspanelcommand.CurrentDraw = ViewElement.none;
-                        }
+                        toolspanelcommand.CurrentDraw = ViewElement.none;
+                        toolspanel.CurrentDraw = ViewElement.none;
                         currentDraw = area;
                         SetSettingsFigure();
                         //area.Id = operationsGrafic.CurrentFreeId;

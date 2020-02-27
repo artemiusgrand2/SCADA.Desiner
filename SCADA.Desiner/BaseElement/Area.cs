@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -246,6 +247,10 @@ namespace SCADA.Desiner.BaseElement
         /// </summary>
         public int ZIndex { get; set; }
 
+        public double ZoomLevelIncrement { get; } = 0.1;
+
+        public double ZoomLevel { get; }
+
         #endregion
 
         public Area(Rectangle rec, ViewArea viewarea, string NameObject)
@@ -255,13 +260,16 @@ namespace SCADA.Desiner.BaseElement
             GeometryFigure(rec);
         }
 
-        public Area(PathGeometry geometry, double strokethickness, ViewArea viewarea, string path, double angle, string NameObject, int station)
+        public Area(PathGeometry geometry, double strokethickness, ViewArea viewarea, string path, 
+                    double angle, string NameObject, int station, double zoomLevelIncrement, double zoomLevel)
         {
             StationNumber = station;
             this.NameObject = NameObject;
             Angle = angle;
             View = viewarea;
             Path = path;
+            ZoomLevelIncrement = zoomLevelIncrement;
+            ZoomLevel = zoomLevel;
             GeometryFigureCopy(geometry, strokethickness);
         }
 

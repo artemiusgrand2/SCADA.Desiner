@@ -231,6 +231,26 @@ namespace SCADA.Desiner.BaseElement
         /// индеск слоя наложения объектов
         /// </summary>
         public int ZIndex {get;set; }
+
+        /// <summary>
+        /// Заливать ли внутри
+        /// </summary>
+        public bool IsFillInside { get; private set; }
+
+
+        Brush Stroke
+        {
+            get
+            {
+                return base.Stroke;
+            }
+            set
+            {
+                base.Stroke = value;
+                if (IsFillInside)
+                    Fill = Stroke;
+            }
+        }
         //
         #endregion
 
@@ -252,30 +272,22 @@ namespace SCADA.Desiner.BaseElement
 
         public LineHelp() { }
 
-        public LineHelp(int stationnumber, int stationRight, string name, PathGeometry geometry, double strokethickness, string namecolor, byte r, byte g, byte b/*, double scroll*/)
+        public LineHelp(int stationnumber, int stationRight, string name, PathGeometry geometry, double strokethickness, string namecolor, byte r, byte g, byte b, bool isFillInside)
         {
-            StationNumber = stationnumber;
-            StationNumberRight = stationRight;
             NameObject = name;
-            if (namecolor == null)
-                GetNameColorNull();
-            else
-            {
-                _namecolor.NameColor = namecolor;
-                _namecolor.R = r;
-                _namecolor.G = g;
-                _namecolor.B = b;
-                _colordefultstroke = new SolidColorBrush(Color.FromRgb(r, g, b));
-            }
-                // _colordefultstroke = color;
-                GeometryFigureCopy(geometry, strokethickness/*, scroll*/); 
-            UpdateRamkaAllocation();
+            SetSettings(stationnumber, stationRight, geometry, strokethickness, namecolor, r, g, b, isFillInside);
         }
 
-        public LineHelp(int stationnumber, int stationRight, PathGeometry geometry, double strokethickness, string namecolor, byte r, byte g, byte b)
+        public LineHelp(int stationnumber, int stationRight, PathGeometry geometry, double strokethickness, string namecolor, byte r, byte g, byte b, bool isFillInside)
+        {
+            SetSettings(stationnumber, stationRight, geometry, strokethickness, namecolor, r, g, b, isFillInside);
+        }
+
+        private void SetSettings(int stationnumber, int stationRight, PathGeometry geometry, double strokethickness, string namecolor, byte r, byte g, byte b, bool isFillInside)
         {
             StationNumber = stationnumber;
             StationNumberRight = stationRight;
+            IsFillInside = isFillInside;
             if (namecolor == null)
                 GetNameColorNull();
             else
@@ -622,6 +634,16 @@ namespace SCADA.Desiner.BaseElement
                 }
             }
             catch { }
+        }
+
+
+        public void SetillInside()
+        {
+            IsFillInside = !IsFillInside;
+            if (IsFillInside)
+                Fill = Stroke;
+            else
+                Fill = Brushes.Transparent;
         }
 
         private void UpdateRamkaAllocation()

@@ -30,12 +30,13 @@ namespace SCADA.Desiner.MainMenu
         public event Reverse Reverse;
         public event NewColor NewColor;
         public event NewWeight NewWeight;
+        public event IsFillInside IsFillInside;
         public event NewScroll NewScroll;
         public event NewSize NewSize;
         public event NewSize NewAligment;
         public event NewScroll NewFontSize;
         public event NewFamilyFont NewFamilyFont;
-        public event NewPicture NewPicture;
+        public event NewSourceForArea NewSource;
         public event NewLayer NewLayer;
         public event HatchLine HatchLine;
 
@@ -168,18 +169,30 @@ namespace SCADA.Desiner.MainMenu
                 itemenewcolor.Click += AddPicture;
                 result.Items.Add(itemenewcolor);
             }
+            if (IsAreaBrowser())
+            {
+                MenuItem itemenewcolor = new MenuItem();
+                itemenewcolor.Header = "Установить страницу";
+                itemenewcolor.Click += AddLink;
+                result.Items.Add(itemenewcolor);
+            }
             //провереям все ли в выделенных элементах вспомагательные линии
             if (YesHelpLine())
             {
-                MenuItem itemenewcolor = new MenuItem();
+                var itemenewcolor = new MenuItem();
                 itemenewcolor.Header = "Изменить цвет вспомагательной линии";
                 itemenewcolor.Click += NewColorControlClick;
                 result.Items.Add(itemenewcolor);
                 //
-                MenuItem itemeneweight = new MenuItem();
+                var itemeneweight = new MenuItem();
                 itemeneweight.Header = "Изменить толщину вспомагательной линии";
                 itemeneweight.Click += NewWeightrControlClick;
                 result.Items.Add(itemeneweight);
+                //
+                var itemeIsFill = new MenuItem();
+                itemeIsFill.Header = "Заливать внутри";
+                itemeIsFill.Click += IsFillInsideControlClick;
+                result.Items.Add(itemeIsFill);
             }
             //провереям все ли в выделенных элементах для масштабирования
             if (YesScrollObejct())
@@ -270,6 +283,23 @@ namespace SCADA.Desiner.MainMenu
             foreach (IGraficObejct el in _mainwindow.ActiveEl)
             {
                 if ((el is Area) && (el as Area).View == Common.Enums.ViewArea.area_picture)
+                {
+                    return true;
+                }
+            }
+            //
+            return false;
+        }
+
+        /// <summary>
+        /// проверяем есть ли область браузера
+        /// </summary>
+        /// <returns></returns>
+        private bool IsAreaBrowser()
+        {
+            foreach (IGraficObejct el in _mainwindow.ActiveEl)
+            {
+                if ((el is Area) && (el as Area).View == Common.Enums.ViewArea.webBrowser)
                 {
                     return true;
                 }
@@ -602,8 +632,18 @@ namespace SCADA.Desiner.MainMenu
             System.Windows.Forms.OpenFileDialog openDialog = new System.Windows.Forms.OpenFileDialog() { Multiselect = false, Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF" };
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (NewPicture != null)
-                    NewPicture(openDialog.FileName);
+                if (NewSource != null)
+                    NewSource(openDialog.FileName, Common.Enums.ViewArea.area_picture);
+            }
+        }
+
+        private void AddLink(object sender, RoutedEventArgs args)
+        {
+            System.Windows.Forms.OpenFileDialog openDialog = new System.Windows.Forms.OpenFileDialog() { Multiselect = false, Filter = "Image Files(*.HTML)|*.HTML" };
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (NewSource != null)
+                    NewSource(openDialog.FileName, Common.Enums.ViewArea.webBrowser);
             }
         }
 
@@ -632,6 +672,12 @@ namespace SCADA.Desiner.MainMenu
                 if (NewWeight != null)
                     NewWeight(dialogsize.Scroll);
             }
+        }
+
+        private void IsFillInsideControlClick(object sender, RoutedEventArgs args)
+        {
+            if (IsFillInside != null)
+                IsFillInside();
         }
 
         private void NewScrollClick(object sender, RoutedEventArgs args)

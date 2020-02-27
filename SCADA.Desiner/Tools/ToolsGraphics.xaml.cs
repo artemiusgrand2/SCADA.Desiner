@@ -904,5 +904,10 @@ namespace SCADA.Desiner.Tools
             if (EventAdd != null)
                 EventAdd();
         }
+
+        private void button_area_webBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            m_currentelemantdraw = ViewElement.webBrowser;
+        }
     }
 }

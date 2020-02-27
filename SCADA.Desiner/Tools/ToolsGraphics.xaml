@@ -50,6 +50,7 @@
                     <Button Name="button_help_element" Content="Шильда" Click="button_help_element_Click"  IsEnabled="True"  />
                     <Button Name="button_time" Content="Часы"   Click="button_time_Click"  />
                     <Button Name="button_area_picture" Content="Область картинки"   Click="button_area_picture_Click"  />
+                    <Button Name="button_area_webBrowser" Content="Область браузера"   Click="button_area_webBrowser_Click"  />
                     <Button Name="button_disconnectors" Content="Разъединители"   Click="button_disconnectors_Click"  />
                     <Button Name="button_analog" Content="Аналоговая ячейка"   Click="button_analog_Click" />
                     <Button Name="button_diagnostic" Content="Диагностическая ячейка"   Click="button_diagnostic_Click" />

@@ -19,7 +19,6 @@
                 <Button Name="button_table_autopilot" Content="Таблица комманд"  Click="button_table_autopilot_Click" />
                 <Button Name="button_area_station" Content="Область станции"  Click="button_area_station_Click" />
                 <Button Name="button_area_message" Content="Область справки"  Click="button_area_message_Click" />
-
             </StackPanel>
 
             <StackPanel Name="panel2" Background="Transparent"   HorizontalAlignment="Stretch"   OpacityMask="White" Grid.Column="1" Grid.ColumnSpan="1">

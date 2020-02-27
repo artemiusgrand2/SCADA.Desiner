@@ -241,5 +241,6 @@ namespace SCADA.Desiner.Tools
             if (_currentelemantdraw == ViewElement.none)
                 _currentelemantdraw = ViewElement.tableautopilot;
         }
+
     }
 }

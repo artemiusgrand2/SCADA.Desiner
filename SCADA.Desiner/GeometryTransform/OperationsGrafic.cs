@@ -147,6 +147,7 @@ namespace SCADA.Desiner.GeometryTransform
                 return _po;
             }
         }
+
         static double savescroll = 1;
         /// <summary>
         /// Масштабный коэффициент
@@ -162,7 +163,6 @@ namespace SCADA.Desiner.GeometryTransform
                 savescroll = value;
             }
         }
-
 
         /// <summary>
         /// последние перемещене по оси X по клавишам
@@ -457,7 +457,7 @@ namespace SCADA.Desiner.GeometryTransform
                 case ViewElement.area:
                     {
                         Area area = data as Area;
-                        Area newelement = new Area(data.Figure, data.StrokeThickness, area.View, area.Path, area.Angle, area.NameObject, area.StationNumber);
+                        Area newelement = new Area(data.Figure, data.StrokeThickness, area.View, area.Path, area.Angle, area.NameObject, area.StationNumber, area.ZoomLevelIncrement, area.ZoomLevel);
                         SetSettingsObject(newelement, data, collection, isSaveId);
                     }
                     break;
@@ -556,7 +556,7 @@ namespace SCADA.Desiner.GeometryTransform
                 case ViewElement.line:
                     {
                         LineHelp line = data as LineHelp;
-                        LineHelp newelement = new LineHelp(data.StationNumber, data.StationNumberRight, data.NameObject, data.Figure, line.StrokeCurrent, line.NameViewColor.NameColor, line.NameViewColor.R, line.NameViewColor.G, line.NameViewColor.B);
+                        LineHelp newelement = new LineHelp(data.StationNumber, data.StationNumberRight, data.NameObject, data.Figure, line.StrokeCurrent, line.NameViewColor.NameColor, line.NameViewColor.R, line.NameViewColor.G, line.NameViewColor.B, line.IsFillInside);
                         SetSettingsObject(newelement, data, collection, isSaveId);
                         foreach (double value in line.StrokeDashArray)
                             newelement.StrokeDashArray.Add(value);
@@ -982,6 +982,22 @@ namespace SCADA.Desiner.GeometryTransform
             AddHistory(currentDrawElement);
         }
 
+        /// <summary>
+        /// заливаем цветом внутри
+        /// </summary>
+        public void IsFillInside(List<IGraficObejct> activeel, Dictionary<int, IGraficObejct> currentDrawElement)
+        {
+            foreach (IGraficObejct graf in activeel)
+            {
+                if (graf is LineHelp)
+                {
+                    (graf as LineHelp).SetillInside();
+                }
+            }
+            //
+            AddHistory(currentDrawElement);
+        }
+
         public void SizeElement(double width, double height, List<IGraficObejct> activeel, Dictionary<int, IGraficObejct> currentDrawElement)
         {
             foreach (IGraficObejct el in activeel)
@@ -1068,17 +1084,18 @@ namespace SCADA.Desiner.GeometryTransform
             }
         }
 
-        public void SetPathPicture(string path, List<IGraficObejct> activeel)
+        public void SetPathPicture(string path, List<IGraficObejct> activeel, ViewArea viewArea)
         {
             foreach (IGraficObejct el in activeel)
             {
                 if (el is Area)
                 {
                     Area area_picture = el as Area;
-                    if (area_picture.View == Common.Enums.ViewArea.area_picture)
+                    if (area_picture.View == Common.Enums.ViewArea.area_picture || area_picture.View == ViewArea.webBrowser)
                     {
                         area_picture.Path = path;
-                        area_picture.SetFillColor(path);
+                        if (area_picture.View == Common.Enums.ViewArea.area_picture)
+                            area_picture.SetFillColor(path);
                     }
                 }
             }
@@ -1554,7 +1571,7 @@ namespace SCADA.Desiner.GeometryTransform
                         case ViewElement.area:
                             {
                                 AreaSave area = el as AreaSave;
-                                Area newelement = new Area(GetPathGeometry(area.Figures, view), Area.strokethickness, area.View, area.Path, area.Angle, area.Name, area.StationNumber);
+                                Area newelement = new Area(GetPathGeometry(area.Figures, view), Area.strokethickness, area.View, area.Path, area.Angle, area.Name, area.StationNumber, area.ZoomLevelIncrement, area.ZoomLevel);
                                 CreateNewGraficObject(newelement, el, update, view, activeel, drawcanvas, currentDrawElement);
                             }
                             break;
@@ -1637,7 +1654,7 @@ namespace SCADA.Desiner.GeometryTransform
                                     linehp.WeightStroke = 1;
                                 if (SCADA.Desiner.WorkForms.NewColorForm.Contains(linehp.NameColor))
                                     WorkGrafic.NameColors.Add(new NameColors() { NameColor = linehp.NameColor, R = linehp.R, G = linehp.G, B = linehp.B });
-                                LineHelp newelement = new LineHelp(el.StationNumber, el.StationNumberRight, GetPathGeometry(el.Figures, view), linehp.WeightStroke, linehp.NameColor, linehp.R, linehp.G, linehp.B) { NameObject = el.Name };
+                                LineHelp newelement = new LineHelp(el.StationNumber, el.StationNumberRight, GetPathGeometry(el.Figures, view), linehp.WeightStroke, linehp.NameColor, linehp.R, linehp.G, linehp.B, linehp.IsFillInside) { NameObject = el.Name};
                                 foreach (double step in linehp.StrokeDashArray)
                                     newelement.StrokeDashArray.Add(step);
                                 CreateNewGraficObject(newelement, el, update, view, activeel, drawcanvas, currentDrawElement);
@@ -1752,11 +1769,12 @@ namespace SCADA.Desiner.GeometryTransform
             //приводим к оригинальным координатам
             OriginalSizeCurrent(true, activeel, groupTransform, linedraw);
             ////удаляем историю
-            //ClearHistory();
+            ClearHistory();
             //отрисовываем проект
             AnalisOpen(Project, ViewSave.save, activeel, drawcanvas, currentElementDraw);
             //обновляем историю
             AddHistory(currentElementDraw);
+            LastCountLevelHistory = history.Count;
         }
 
         /// <summary>
@@ -1871,7 +1889,7 @@ namespace SCADA.Desiner.GeometryTransform
                     case ViewElement.area:
                         {
                             Area area = el as Area;
-                            AreaSave newelement = new AreaSave() { Angle = area.Angle, Path = area.Path, View = area.View };
+                            AreaSave newelement = new AreaSave() { Angle = area.Angle, Path = area.Path, View = area.View, ZoomLevel = area.ZoomLevel, ZoomLevelIncrement = area.ZoomLevelIncrement };
                             SetBaseSaveObject(view, el, newelement);
                             Project.GraficObjects.Add(newelement);
                         }
@@ -1962,7 +1980,8 @@ namespace SCADA.Desiner.GeometryTransform
                                 R = linehp.NameViewColor.R,
                                 G = linehp.NameViewColor.G,
                                 B = linehp.NameViewColor.B, 
-                                WeightStroke = linehp.StrokeCurrent / SaveScroll
+                                WeightStroke = linehp.StrokeCurrent / SaveScroll,
+                                IsFillInside = linehp.IsFillInside
                             };
                             foreach (double step in linehp.StrokeDashArray)
                                 newelement.StrokeDashArray.Add(step);
