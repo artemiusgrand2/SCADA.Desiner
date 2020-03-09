@@ -518,7 +518,7 @@ namespace SCADA.Desiner.GeometryTransform
                 case ViewElement.buttoncommand:
                     {
                         ButtonCommand command = data as ButtonCommand;
-                        ButtonCommand newelement = new ButtonCommand(data.Figure, data.StrokeThickness, command.Text.Margin.Left, command.Text.Margin.Top, data.NameObject, command.HelpText,
+                        ButtonCommand newelement = new ButtonCommand(data.Figure, data.StrokeThickness, command.Text.Margin.Left, command.Text.Margin.Top, data.NameObject, command.HelpText, command.Parameters,
                            data.RotateText, command.Text.FontSize, command.ViewCommand, command.ViewPanel, command.StationNumber);
                         SetSettingsObject(newelement, data, collection, isSaveId);
                     }
@@ -1611,7 +1611,7 @@ namespace SCADA.Desiner.GeometryTransform
                                 ButtonCommand newelement = new ButtonCommand(GetPathGeometry(commandbutton.Figures, view), ButtonCommand._strokethickness,
                                                                              view == ViewSave.save ? commandbutton.Xinsert * System.Windows.SystemParameters.CaretWidth : commandbutton.Xinsert,
                                                                              view == ViewSave.save ? commandbutton.Yinsert * System.Windows.SystemParameters.CaretWidth : commandbutton.Yinsert,
-                                                                             commandbutton.Name, commandbutton.HelpText, commandbutton.Angle,
+                                                                             commandbutton.Name, commandbutton.HelpText, commandbutton.Parametrs, commandbutton.Angle,
                                                                              view == ViewSave.save ? commandbutton.TextSize * System.Windows.SystemParameters.CaretWidth : commandbutton.TextSize,
                                                                              commandbutton.ViewCommand, commandbutton.ViewPanel, commandbutton.StationNumber);
                                 CreateNewGraficObject(newelement, el, update, view, activeel, drawcanvas, currentDrawElement);
@@ -1911,7 +1911,7 @@ namespace SCADA.Desiner.GeometryTransform
                     case ViewElement.buttoncommand:
                         {
                             ButtonCommand command = el as ButtonCommand;
-                            ButtonCommandSave newelement = new ButtonCommandSave() { ViewCommand = command.ViewCommand, ViewPanel = command.ViewPanel, HelpText = command.HelpText};
+                            ButtonCommandSave newelement = new ButtonCommandSave() { ViewCommand = command.ViewCommand, ViewPanel = command.ViewPanel, HelpText = command.HelpText, Parametrs = command.Parameters};
                             newelement.Angle = command.RotateText;
                             newelement.TextSize = (view == ViewSave.save ? command.Text.FontSize / System.Windows.SystemParameters.CaretWidth : command.Text.FontSize);
                             newelement.Xinsert = (view == ViewSave.save ? command.Text.Margin.Left / System.Windows.SystemParameters.CaretWidth : command.Text.Margin.Left);

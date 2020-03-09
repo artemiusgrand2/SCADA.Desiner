@@ -22,7 +22,7 @@ namespace SCADA.Desiner.Delegate
     public delegate void visiblesetka(bool Checked);
     public delegate void SpisokId(List<int> Id, PointFigure point);
     public delegate void updateelement(List<MyTable> tables);
-    public delegate void updateelementCommand(string name, string help, ViewCommand viewcommand, ViewPanel viewpanel, int id);
+    public delegate void updateelementCommand(string name, string help, string parametrs, ViewCommand viewcommand, ViewPanel viewpanel, int id);
 
     public delegate void NewTaktEvent();
     public delegate void Sizedelta(double deltax, double deltay);

@@ -69,7 +69,7 @@ namespace SCADA.Desiner.Tools
         readonly IDictionary<ViewCommand, string> dictionaryCommand = new Dictionary<ViewCommand, string>()
         {
             {ViewCommand.diagnostics, ViewNameCommand.diagnostics}, {ViewCommand.numbertrain, ViewNameCommand.numbertrain}, {ViewCommand.show_control, ViewNameCommand.show_control},
-            {ViewCommand.sound, ViewNameCommand.sound}, {ViewCommand.show_table_train, ViewNameCommand.show_table_train},
+            {ViewCommand.sound, ViewNameCommand.sound}, {ViewCommand.show_table_train, ViewNameCommand.show_table_train}, {ViewCommand.run_auto_supervisory, ViewNameCommand.run_auto_supervisory},
             {ViewCommand.filter_train, ViewNameCommand.filter_train}, {ViewCommand.help, ViewNameCommand.help}, {ViewCommand.style, ViewNameCommand.style}, {ViewCommand.train_even, ViewNameCommand.train_even},
             {ViewCommand.train_odd, ViewNameCommand.train_odd}, {ViewCommand.train_unknow, ViewNameCommand.train_unknow}, {ViewCommand.viewtrain, ViewNameCommand.viewtrain}, {ViewCommand.content_help, ViewNameCommand.content_help},
             {ViewCommand.content_exchange, ViewNameCommand.content_exchange}, {ViewCommand.update_style, ViewNameCommand.update_style}, {ViewCommand.numbertrack, ViewNameCommand.numbertrack}, {ViewCommand.pass, ViewNameCommand.pass},
@@ -137,6 +137,7 @@ namespace SCADA.Desiner.Tools
                     _selectitem = selectcollection[selectcollection.Count - 1];
                     Name_textbox.Text = selectcollection[selectcollection.Count - 1].NameObject;
                     Help_textbox.Text = (selectcollection[selectcollection.Count - 1] as ButtonCommand).HelpText;
+                    Parametrs.Text = (selectcollection[selectcollection.Count - 1] as ButtonCommand).Parameters;
                     Combox_ViewCommand.SelectedItem =  (dictionaryCommand.ContainsKey((selectcollection[selectcollection.Count - 1] as ButtonCommand).ViewCommand))? dictionaryCommand[(selectcollection[selectcollection.Count - 1] as ButtonCommand).ViewCommand]:null;
                     Combox_ViewPanel.SelectedIndex = _viewpanel_number[(selectcollection[selectcollection.Count - 1] as ButtonCommand).ViewPanel];
                 }
@@ -151,6 +152,7 @@ namespace SCADA.Desiner.Tools
             if (Name_textbox.Text != string.Empty)
                 Name_textbox.Text = string.Empty;
             Help_textbox.Text = string.Empty;
+            Parametrs.Text = string.Empty;
             Combox_ViewCommand.SelectedIndex = -1;
             Combox_ViewPanel.SelectedIndex = -1;
         }
@@ -175,7 +177,7 @@ namespace SCADA.Desiner.Tools
             if (_selectitem != null)
             {
                 if (UpdateElement != null)
-                    UpdateElement(Name_textbox.Text, Help_textbox.Text, SetViewCommand(), SetViewPanel(), _selectitem.Id);
+                    UpdateElement(Name_textbox.Text, Help_textbox.Text, Parametrs.Text, SetViewCommand(), SetViewPanel(), _selectitem.Id);
             }
         }
 

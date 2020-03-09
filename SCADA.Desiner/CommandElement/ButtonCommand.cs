@@ -79,6 +79,10 @@ namespace SCADA.Desiner.CommandElement
         /// </summary>
         public string HelpText { get; set; }
         /// <summary>
+        /// параматры
+        /// </summary>
+        public string Parameters { get; set; }
+        /// <summary>
         /// Ид объекта
         /// </summary>
         public int Id { get; set; }
@@ -263,17 +267,18 @@ namespace SCADA.Desiner.CommandElement
             IsVisible = true;
         }
 
-        public ButtonCommand(PathGeometry geometry, double strokethickness, double Left, double Top, string Name, string Help, double Rotate, double FontSize, ViewCommand viewcommand, ViewPanel viewpanel, int station)
+        public ButtonCommand(PathGeometry geometry, double strokethickness, double left, double top, string name, string help, string parametrs, double Rotate, double FontSize, ViewCommand viewcommand, ViewPanel viewpanel, int station)
         {
             ViewCommand = viewcommand;
             ViewPanel = viewpanel;
             StationNumber = station;
-            NameObject = Name;
-            HelpText = Help;
+            NameObject = name;
+            HelpText = help;
+            Parameters = parametrs;
             _text.Text = (NameObject != null) ? NameObject.Split(new char[] { ';' })[0] : string.Empty;
             _text.FontSize = FontSize;
             RotateText = Rotate;
-            _text.Margin = new Thickness(Left, Top, 0, 0);
+            _text.Margin = new Thickness(left, top, 0, 0);
             _text.RenderTransform = new RotateTransform(RotateText);
             GeometryFigureCopy(geometry, strokethickness);
         }

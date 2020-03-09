@@ -426,7 +426,7 @@ namespace SCADA.Desiner.WindowWork
         /// <summary>
         /// изменяем свойства объекта управления
         /// </summary>
-        private void EventUpdateSettingsCommand(string Name, string Help,  ViewCommand viewcommad, ViewPanel viewpanel, int id)
+        private void EventUpdateSettingsCommand(string Name, string Help, string parametrs, ViewCommand viewcommad, ViewPanel viewpanel, int id)
         {
             try
             {
@@ -443,6 +443,8 @@ namespace SCADA.Desiner.WindowWork
                         command.ViewCommand = viewcommad;
                         command.ViewPanel = viewpanel;
                         command.HelpText = Help;
+                        command.Parameters = parametrs;
+                     
                         double width = HelpesCalculation.LenghtSide(((ArcSegment)command.Figure.Figures[0].Segments[command.Figure.Figures[0].Segments.Count - 2]).Point, command.Figure.Figures[0].StartPoint);
                         double height = HelpesCalculation.LenghtSide(((ArcSegment)command.Figure.Figures[0].Segments[2]).Point, command.Figure.Figures[0].StartPoint);
                         command.Text.FontSize = HelpesCalculation.FontSizeText(_ktextweight, _ktextheight,

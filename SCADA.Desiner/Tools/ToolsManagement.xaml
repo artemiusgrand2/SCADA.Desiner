@@ -26,6 +26,8 @@
                 <TextBox  Name="Name_textbox"></TextBox>
                 <Label   Content="Справка по объекту" HorizontalAlignment="Center"  FontSize="13" />
                 <TextBox  Name="Help_textbox"></TextBox>
+                <Label   Content="Параметры" HorizontalAlignment="Center"  FontSize="13" />
+                <TextBox  Name="Parametrs"></TextBox>
                 <Label Name="label_0"  Content="Тип управляния" HorizontalAlignment="Center"  FontSize="13" />
                 <ComboBox  Name="Combox_ViewCommand" />
                 <Label Name="label_1"  Content="Область управления" HorizontalAlignment="Center"  FontSize="13" />
