@@ -251,6 +251,8 @@ namespace SCADA.Desiner.BaseElement
                     Fill = Stroke;
             }
         }
+
+        public string FileClick { get; set; } = string.Empty;
         //
         #endregion
 

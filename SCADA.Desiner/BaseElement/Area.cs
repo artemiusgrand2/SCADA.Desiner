@@ -251,6 +251,8 @@ namespace SCADA.Desiner.BaseElement
 
         public double ZoomLevel { get; }
 
+        public string FileClick { get; set; } = string.Empty;
+
         #endregion
 
         public Area(Rectangle rec, ViewArea viewarea, string NameObject)

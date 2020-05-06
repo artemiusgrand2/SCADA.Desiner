@@ -438,6 +438,7 @@ namespace SCADA.Desiner.GeometryTransform
             data.Notes = olddata.Notes;
             data.StationNumber = olddata.StationNumber;
             data.StationNumberRight = olddata.StationNumberRight;
+            data.FileClick = olddata.FileClick;
             if (olddata is IScrollElement && data is IScrollElement)
                 (data as IScrollElement).CurrencyScroll = (olddata as IScrollElement).CurrencyScroll;
             data.DefaultColor();
@@ -1522,6 +1523,7 @@ namespace SCADA.Desiner.GeometryTransform
             element.IsVisible = baseSave.IsVisible;
             element.StationNumber = baseSave.StationNumber;
             element.StationNumberRight = baseSave.StationNumberRight;
+            element.FileClick = baseSave.FileForClick;
             update.Add(element);
             //если вставляем из буфера обмена Windows
             if (view == ViewSave.copy)
@@ -1854,6 +1856,7 @@ namespace SCADA.Desiner.GeometryTransform
             newelement.StationNumberRight = graficObject.StationNumberRight;
             newelement.ViewElement = graficObject.ViewElement;
             newelement.ZIndex = graficObject.ZIndex;
+            newelement.FileForClick = graficObject.FileClick;
             if (graficObject is IScrollElement)
                 newelement.CurrencyScroll = (graficObject as IScrollElement).CurrencyScroll;
             newelement.Figures = GetFiguresSave(graficObject.Figure.Figures, view);

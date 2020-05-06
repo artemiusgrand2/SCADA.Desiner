@@ -251,6 +251,8 @@ namespace SCADA.Desiner.CommandElement
         /// </summary>
         public int ZIndex { get; set; }
 
+        public string FileClick { get; set; } = string.Empty;
+
         #endregion
 
         /// <summary>

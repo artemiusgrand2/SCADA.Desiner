@@ -43,5 +43,9 @@ namespace SCADA.Desiner.HelpsProject
         /// выделени ли элемент
         /// </summary>
         public bool IsSelect { get; set; }
+        /// <summary>
+        /// Путь к файлу
+        /// </summary>
+        public string FileClick { get; set; }
     }
 }

@@ -227,6 +227,8 @@ namespace SCADA.Desiner
         /// </summary>
         public int ZIndex { get; set; }
 
+        public string FileClick { get; set; } = string.Empty;
+
         #endregion
 
         /// <summary>

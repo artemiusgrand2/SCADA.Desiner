@@ -82,6 +82,10 @@ namespace SCADA.Desiner.Inteface
         /// Индекс слоя 
         /// </summary>
         int ZIndex { get; set; }
+        /// <summary>
+        /// Путь к файлу который будет запускаться 
+        /// </summary>
+        string FileClick { get; set; }
 
         #endregion
 

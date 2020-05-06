@@ -245,6 +245,8 @@ namespace SCADA.Desiner.BaseElement
         /// индеск слоя наложения объектов
         /// </summary>
         public int ZIndex { get; set; }
+
+        public string FileClick { get; set; } = string.Empty;
         //
         #endregion
 

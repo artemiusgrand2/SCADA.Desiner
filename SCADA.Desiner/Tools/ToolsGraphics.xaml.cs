@@ -211,10 +211,12 @@ namespace SCADA.Desiner.Tools
                             row.IsSelect = true;
                     }
                     //проверяем наличие совпадений в группе элементов
-                    bool text = true, notes = true, left = true, right = true, input = true, type = true, isvisible = true;
-                    EqualObject(ref text, ref notes, ref left, ref right, _selectelement, ref input, ref type, ref isvisible);
+                    bool text = true, notes = true, left = true, right = true, input = true, type = true, isvisible = true, fileClick = true;
+                    EqualObject(ref text, ref notes, ref left, ref right, ref fileClick, _selectelement, ref input, ref type, ref isvisible);
                     if (text)
                         Name_textbox.Text = _selectelement[_selectelement.Count - 1].NameObject;
+                    if (fileClick)
+                        NameFileClick.Content = _selectelement[_selectelement.Count - 1].FileClick;
                     if (notes)
                         Notes_textbox.Text = _selectelement[_selectelement.Count - 1].Notes;
                     if (isvisible)
@@ -382,24 +384,25 @@ namespace SCADA.Desiner.Tools
         /// проверяем повторяющиеся элементы станции
         /// </summary>
         /// <returns></returns>
-        private void EqualObject(ref bool name, ref bool notes, ref bool left, ref bool right, List<IGraficObejct> collection, ref bool input, ref bool typeDisconnector, ref bool isvisible)
+        private void EqualObject(ref bool name, ref bool notes, ref bool left, ref bool right, ref bool fileClick, List<IGraficObejct> collection, ref bool input, ref bool typeDisconnector, ref bool isvisible)
         {
             if (collection != null)
             {
                 //
                 if (collection.Count > 1)
                 {
-                    string text = collection[0].NameObject;
-                    string notestext = collection[0].Notes;
-                    double numberleft = collection[0].StationNumber;
-                    double numberright = collection[0].StationNumberRight;
-                    bool visible = collection[0].IsVisible;
-                    bool IsInput =  (collection[0] is LightTrain) ? (collection[0] as LightTrain).IsInput : input = false;
+                    var text = collection[0].NameObject;
+                    var notestext = collection[0].Notes;
+                    var numberleft = collection[0].StationNumber;
+                    var numberright = collection[0].StationNumberRight;
+                    var visible = collection[0].IsVisible;
+                    var IsInput =  (collection[0] is LightTrain) ? (collection[0] as LightTrain).IsInput : input = false;
                     if (!(collection[0] is LightTrain))
                         input = false;
                     var type = (collection[0] is Disconnectors) ? (collection[0] as Disconnectors).Type : TypeDisconnectors.notNormal;
                     if (!(collection[0] is Disconnectors))
                         typeDisconnector = false;
+                    var fileClickCompare = collection[0].FileClick;
                     //
                     for (int i = 1; i < collection.Count; i++)
                     {
@@ -409,9 +412,11 @@ namespace SCADA.Desiner.Tools
                         if (collection[i].StationNumberRight != numberright)
                             right = false;
                         //
-                        //
                         if (collection[i].NameObject != text)
                             name = false;
+                        //
+                        if (collection[i].FileClick != fileClickCompare)
+                            fileClick = false;
                         //
                         if (collection[i].Notes != notestext)
                             notes = false;
@@ -466,6 +471,8 @@ namespace SCADA.Desiner.Tools
             //
             if (TypeDis.Visibility == System.Windows.Visibility.Visible)
                 row.TypeDis = Combox_TypeObject.Text;
+            if (!string.IsNullOrEmpty(NameFileClick.Content.ToString()))
+                row.FileClick = NameFileClick.Content.ToString();
             //
             TableObject.Items.Refresh();
         }
@@ -496,19 +503,20 @@ namespace SCADA.Desiner.Tools
                             if (row != null)
                             {
                                 UpdateEl(row);
-                                TableObject.Items.Refresh();
                                 //
-                                answerUpdate.Add(new MyTable()
-                                {
-                                    Id = row.Id,
-                                    Name = row.Name,
-                                    Notes = row.Notes,
-                                    Numberstationleft = row.Numberstationleft,
-                                    Numberstationright = row.Numberstationright,
-                                    IsVisible = row.IsVisible,
-                                    IsInput = row.IsInput,
-                                    Type = row.TypeDis//(_selectelement.Count == 1) ? Combox_TypeObject.Text: ((element is Disconnectors) ? GetNameDisconnector((element as Disconnectors).Type) : string.Empty)
-                                });
+                                answerUpdate.Add(row);
+                                //answerUpdate.Add(new MyTable()
+                                //{
+                                //    Id = row.Id,
+                                //    Name = row.Name,
+                                //    Notes = row.Notes,
+                                //    Numberstationleft = row.Numberstationleft,
+                                //    Numberstationright = row.Numberstationright,
+                                //    IsVisible = row.IsVisible,
+                                //    IsInput = row.IsInput,
+                                //    Type = row.TypeDis,//(_selectelement.Count == 1) ? Combox_TypeObject.Text: ((element is Disconnectors) ? GetNameDisconnector((element as Disconnectors).Type) : string.Empty)
+                                //    FileClick = row.FileClick
+                                //});
                             }
                         }
                         //
@@ -539,6 +547,7 @@ namespace SCADA.Desiner.Tools
         {
             if (Name_textbox.Text != string.Empty)
                 Name_textbox.Text = string.Empty;
+                NameFileClick.Content = string.Empty;
             if (Notes_textbox.Text != string.Empty)
                 Notes_textbox.Text = string.Empty;
             IsVisibleObject.IsChecked = false;
@@ -887,10 +896,6 @@ namespace SCADA.Desiner.Tools
                 EventAdd();
         }
 
-        private void factorBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
 
         private void textFormatBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -908,6 +913,13 @@ namespace SCADA.Desiner.Tools
         private void button_area_webBrowser_Click(object sender, RoutedEventArgs e)
         {
             m_currentelemantdraw = ViewElement.webBrowser;
+        }
+
+        private void AddFileClick_Click(object sender, RoutedEventArgs e)
+        {
+            var openDialog = new System.Windows.Forms.OpenFileDialog() { Multiselect = false, Filter = "All types(*.*)|*.*" };
+            if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                NameFileClick.Content = openDialog.FileName;
         }
     }
 }

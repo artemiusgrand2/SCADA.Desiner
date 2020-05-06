@@ -66,11 +66,19 @@
                     <TextBox  Name="Name_textbox" PreviewKeyDown="Name_textbox_PreviewKeyDown"></TextBox>
                     <Label  Name="label_title"  Content="Пояснения:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
                     <TextBox  Name="Notes_textbox" PreviewKeyDown="Name_textbox_PreviewKeyDown"></TextBox>
+
+                    <StackPanel >
+                        <Label   Content="Файл запуска:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                        <WrapPanel >
+                            <Button  Name="AddFileClick" Content="Добавить"  Click="AddFileClick_Click"  />
+                            <Label  Name="NameFileClick"  HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold"/>
+                        </WrapPanel >
+                    </StackPanel>
+
                     <StackPanel Name="SettingsAnalogCells" Visibility="Collapsed">
                         <Label    Content="Формат вывода:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
                         <TextBox  Name="textFormatBox" PreviewKeyDown="textFormatBox_PreviewKeyDown"></TextBox>
                         <Label  Content="Множитель:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
-                        <TextBox  Name="factorBox" PreviewKeyDown="factorBox_PreviewKeyDown" Text= "1"></TextBox>
                     </StackPanel>
                     <StackPanel Name="LeftStation" >
                         <Label Name="label_0"  Content="Ст. контроля"  HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />

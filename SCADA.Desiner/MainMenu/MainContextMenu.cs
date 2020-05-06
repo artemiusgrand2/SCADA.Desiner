@@ -639,7 +639,7 @@ namespace SCADA.Desiner.MainMenu
 
         private void AddLink(object sender, RoutedEventArgs args)
         {
-            System.Windows.Forms.OpenFileDialog openDialog = new System.Windows.Forms.OpenFileDialog() { Multiselect = false, Filter = "Image Files(*.HTML)|*.HTML" };
+            System.Windows.Forms.OpenFileDialog openDialog = new System.Windows.Forms.OpenFileDialog() { Multiselect = false, Filter = "Image Files(*.HTML;*.PDF)|*.HTML;*.PDF" };
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (NewSource != null)

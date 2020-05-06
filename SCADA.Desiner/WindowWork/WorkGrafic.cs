@@ -491,9 +491,9 @@ namespace SCADA.Desiner.WindowWork
         /// <param name="Id">ади</param>
         /// <param name="Name">название объекта</param>
         /// <param name="numberstationleft">номер станции</param>
-        private void EventUpdateSettings(List<MyTable> tables)
+        private void EventUpdateSettings(List<MyTable> rows)
         {
-            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(NewThreadingUpdate), tables);
+            System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(NewThreadingUpdate), rows);
         }
 
         private void NewThreadingUpdate(object sender)
@@ -504,9 +504,9 @@ namespace SCADA.Desiner.WindowWork
                 {
                     try
                     {
-                        List<MyTable> tables = (List<MyTable>)sender;
+                        List<MyTable> rows = (List<MyTable>)sender;
                         //
-                        foreach (MyTable row in tables)
+                        foreach (MyTable row in rows)
                         {
                             try
                             {
@@ -519,6 +519,7 @@ namespace SCADA.Desiner.WindowWork
                                     graf.IsVisible = row.IsVisible;
                                     graf.StationNumber = int.Parse(row.Numberstationleft);
                                     graf.StationNumberRight = int.Parse(row.Numberstationright);
+                                    graf.FileClick = row.FileClick;
                                     //
                                     Traintrack path = currentDrawElement[row.Id] as Traintrack;
                                     if (path != null)
@@ -1370,7 +1371,7 @@ namespace SCADA.Desiner.WindowWork
                                 break;
                             default:
                                 {
-                       
+
                                     switch (toolspanelcommand.CurrentDraw)
                                     {
                                         case ViewElement.tablenumbertrain:
@@ -1380,7 +1381,7 @@ namespace SCADA.Desiner.WindowWork
                                             area = new Area(operationsGrafic.FrameRec, ViewArea.area_station, "Область станции");
                                             break;
                                         case ViewElement.area_message:
-                                            area = new Area(operationsGrafic.FrameRec, ViewArea.area_message, "Область справки");
+                                            area = new Area(operationsGrafic.FrameRec, ViewArea.area_message, "Область сообщений");
                                             break;
                                         case ViewElement.tableautopilot:
                                             area = new Area(operationsGrafic.FrameRec, ViewArea.table_autopilot, "Область автодействия");
@@ -1531,10 +1532,10 @@ namespace SCADA.Desiner.WindowWork
                     operationsGrafic.DefaultColor(activeel, draw_canvas, toolspanel);
                     break;
                 case Key.A:
-                    operationsGrafic.RotateElement(45, activeel, currentDrawElement);
+                    operationsGrafic.RotateElement(90, activeel, currentDrawElement);
                     break;
                 case Key.D:
-                    operationsGrafic.RotateElement(-45, activeel, currentDrawElement);
+                    operationsGrafic.RotateElement(90, activeel, currentDrawElement);
                     break;
                 case Key.Delete:
                     operationsGrafic.DeleteActiveObejct(activeel, currentDrawElement, draw_canvas);
