@@ -92,5 +92,8 @@ d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\Tools\ToolsGraphics.baml
 d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.g.resources
 d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.Properties.Resources.resources
 d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.csproj.GenerateResource.Cache
-D:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.csprojResolveAssemblyReference.cache
 d:\Distributiv\SCADA.Desiner\SCADA.Desiner\bin\Debug\SCADA.Common.dll
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.csprojAssemblyReference.cache
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\bin\Debug\log4net.dll
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.csproj.CoreCompileInputs.cache
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\SCADA.Desiner.csproj.CopyComplete

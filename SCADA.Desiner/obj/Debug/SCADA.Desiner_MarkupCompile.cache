@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\obj\Debug\
 SCADA.Desiner
 none
 false
 DEBUG;TRACE
-D:\Distributiv\SCADA.Desiner\SCADA.Desiner\App.xaml
+d:\Distributiv\SCADA.Desiner\SCADA.Desiner\App.xaml
 191629092593
 
 731002713203
-16617085145
+171340327395
 MainWindow.xaml;Themes\BureauBlack.xaml;Themes\BureauBlue.xaml;Themes\ExpressionDark.xaml;Themes\ExpressionLight.xaml;Themes\ShinyBlue.xaml;Themes\ShinyRed.xaml;Themes\WhistlerBlue.xaml;Tools\SettingsFigure.xaml;Tools\ToolsGraphics.xaml;Tools\ToolsManagement.xaml;WindowWork\WorkForms\CloseProgramm.xaml;WindowWork\WorkForms\EnterNewNameColor.xaml;WindowWork\WorkForms\HatchLineForm.xaml;WindowWork\WorkForms\NewColorForm.xaml;WindowWork\WorkForms\NewSizeElementWpf.xaml;WindowWork\WorkForms\NewWidthHeightElement.xaml;WindowWork\WorkForms\SaveOpenFormsWpf.xaml;WindowWork\WorkForms\SetAngle.xaml;
 
 False

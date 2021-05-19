@@ -471,7 +471,7 @@ namespace SCADA.Desiner.Tools
             //
             if (TypeDis.Visibility == System.Windows.Visibility.Visible)
                 row.TypeDis = Combox_TypeObject.Text;
-            if (!string.IsNullOrEmpty(NameFileClick.Content.ToString()))
+            if (NameFileClick.Content != null && !string.IsNullOrEmpty(NameFileClick.Content.ToString()))
                 row.FileClick = NameFileClick.Content.ToString();
             //
             TableObject.Items.Refresh();

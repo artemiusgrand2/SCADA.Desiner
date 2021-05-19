@@ -1444,25 +1444,32 @@ namespace SCADA.Desiner.WindowWork
         {
             if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["file_settings"]))
             {
-                using (Stream savestream = new FileStream(ConfigurationManager.AppSettings["file_settings"], FileMode.Create))
+                try
                 {
-                    XmlSerializer xml = new XmlSerializer(typeof(Settings));
-                    xml.Serialize(savestream, new Settings()
+                    using (Stream savestream = new FileStream(ConfigurationManager.AppSettings["file_settings"], FileMode.Create))
                     {
-                        StartCommand_X = toolspanelcommand.Left,
-                        StartCommand_Y = toolspanelcommand.Top,
-                        StartCommand_Height = toolspanelcommand.Height,
-                        StartCommand_Width = toolspanelcommand.Width,
-                        StartGrafic_X = toolspanel.Left,
-                        StartGrafic_Y = toolspanel.Top,
-                        StartGrafic_Height = toolspanel.Height,
-                        StartGrafic_Widht = toolspanel.Width,
-                        StartSettings_X = toolsetingsfigure.Left,
-                        StartSettings_Y = toolsetingsfigure.Top,
-                        StartSettings_Height = toolsetingsfigure.Height,
-                        StartSettings_Width = toolsetingsfigure.Width
-                    });
-                    savestream.Close();
+                        XmlSerializer xml = new XmlSerializer(typeof(Settings));
+                        xml.Serialize(savestream, new Settings()
+                        {
+                            StartCommand_X = toolspanelcommand.Left,
+                            StartCommand_Y = toolspanelcommand.Top,
+                            StartCommand_Height = toolspanelcommand.Height,
+                            StartCommand_Width = toolspanelcommand.Width,
+                            StartGrafic_X = toolspanel.Left,
+                            StartGrafic_Y = toolspanel.Top,
+                            StartGrafic_Height = toolspanel.Height,
+                            StartGrafic_Widht = toolspanel.Width,
+                            StartSettings_X = toolsetingsfigure.Left,
+                            StartSettings_Y = toolsetingsfigure.Top,
+                            StartSettings_Height = toolsetingsfigure.Height,
+                            StartSettings_Width = toolsetingsfigure.Width
+                        });
+                        savestream.Close();
+                    }
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show(error.Message);
                 }
             }
             //SaveTakt.Stop();
