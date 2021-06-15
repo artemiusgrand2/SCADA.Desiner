@@ -62,13 +62,13 @@
             <ScrollViewer Grid.Column="1"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
                 <StackPanel Name="panel2" Background="Transparent"   HorizontalAlignment="Stretch"   OpacityMask="White" Grid.Column="1" Grid.ColumnSpan="1">
                     <CheckBox Content="Видимость объекта" Name="IsVisibleObject"/>
-                    <Label  Name="label_name"  Content="Название объекта:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                    <Label  Name="label_name"  Content="Название объекта:" HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                     <TextBox  Name="Name_textbox" PreviewKeyDown="Name_textbox_PreviewKeyDown"></TextBox>
-                    <Label  Name="label_title"  Content="Пояснения:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                    <Label  Name="label_title"  Content="Пояснения:" HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                     <TextBox  Name="Notes_textbox" PreviewKeyDown="Name_textbox_PreviewKeyDown"></TextBox>
 
                     <StackPanel >
-                        <Label   Content="Файл запуска:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                        <Label   Content="Файл запуска:" HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                         <WrapPanel >
                             <Button  Name="AddFileClick" Content="Добавить"  Click="AddFileClick_Click"  />
                             <Label  Name="NameFileClick"  HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold"/>
@@ -76,21 +76,21 @@
                     </StackPanel>
 
                     <StackPanel Name="SettingsAnalogCells" Visibility="Collapsed">
-                        <Label    Content="Формат вывода:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                        <Label    Content="Формат вывода:" HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                         <TextBox  Name="textFormatBox" PreviewKeyDown="textFormatBox_PreviewKeyDown"></TextBox>
                         <Label  Content="Множитель:" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
                     </StackPanel>
                     <StackPanel Name="LeftStation" >
-                        <Label Name="label_0"  Content="Ст. контроля"  HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                        <Label Name="label_0"  Content="Ст. контроля"  HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                         <WrapPanel >
-                            <TextBox Width="50" Name="Numberstationleft_textbox"></TextBox>
+                            <TextBox MinWidth="50" Name="Numberstationleft_textbox"></TextBox>
                             <ComboBox Width="102" Name="Combox_NumberStationLeft" SelectionChanged="comboBox_StationLeft_SelectionChanged"/>
                         </WrapPanel >
                     </StackPanel>
                     <StackPanel Name="RightStation"  >
-                        <Label  Content="Ст. переход" HorizontalAlignment="Center"  FontSize="13" FontWeight="Bold" />
+                        <Label  Content="Ст. переход" HorizontalAlignment="Left"  FontSize="13" FontWeight="Bold" />
                         <WrapPanel>
-                            <TextBox Width="50" Name="Numberrightstation_textbox"></TextBox>
+                            <TextBox MinWidth="50" Name="Numberrightstation_textbox"></TextBox>
                             <ComboBox Width="102" Name="Combox_NumberStationRight" SelectionChanged="comboBox_StationRight_SelectionChanged" />
                         </WrapPanel>
                     </StackPanel>
